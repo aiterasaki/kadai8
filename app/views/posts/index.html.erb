@@ -1,0 +1,39 @@
+
+<% if user_signed_in? %>
+ <%= link_to "マイページ", user_path(current_user) %>
+
+<% end %>
+
+<h1>商品一覧</h1>
+
+<h2><%= link_to '新規投稿',new_post_path,class:'header-menu' %> </h2>
+
+
+<% @posts.each do |post| %>
+<div class="box25">
+<p>
+    <tr>
+      <% if post.picture? %>
+    　<td><%=  image_tag post.picture.url%></td>
+    　<% else %>
+    　<td>画像がありません</td>
+    　
+    　<% end %>
+    
+    </tr>
+
+
+<span>商品名：<%=link_to post.title, post_path(post.id) %></span>
+
+<span>詳細：<%=link_to post.body, post_path(post.id) %></span>
+
+<span>価格：<%=link_to post.price, post_path(post.id) %>円</span>
+
+</p>
+</div>
+<br>
+<% end %>
+
+<%= link_to "一覧へ戻る", posts_path, class: "btn" %>
+
+<%= paginate @posts %>

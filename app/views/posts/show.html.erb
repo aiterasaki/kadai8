@@ -1,0 +1,46 @@
+
+<% if user_signed_in? %>
+ <%= link_to "マイページ", user_path(current_user) %>
+<% end %>
+<br>
+<br>
+<%= render_breadcrumbs separator: ' > ' %>
+<br>
+<br>
+<div class="box25">
+<h3>商品名：<%= @post.title %></h3>
+<h3>商品説明：<%= @post.body %></h3>
+<h3>商品価格：<%= @post.price %>円</h3>
+<h3>商品画像</h3>
+ <% if @post.picture? %>
+<p><%= image_tag @post.picture.url %></p>
+ <% else %>
+    　<td>画像がありません</td>
+ <% end %>
+
+
+<!-- <h2>商品画像</h2> -->
+<%#= image_tag @post.product_images.image_id.url %>
+ <% @post.product_images.each do |pimage| %>
+  <% if @post.product_images? %>
+ 	<%= image_tag pimage.image_id.url %>
+ 	<br>
+ 	<% else %>
+    　<td>画像がありません</td>
+ <% end %>
+<% end %>
+<% if user_signed_in? %>
+	<% if current_user.id == @post.user.id %>
+
+	<%= link_to "編集", edit_post_path(@post.id), class: "btn edit-btn" %>
+
+	<%= link_to "削除", post_path(@post.id), method: :delete, class: "btn destroy-btn", "data-confirm" => "本当に削除しますか？" %>
+	<% end %>
+
+</div>
+<br>
+<% end %>
+
+<%= link_to "一覧へ戻る", posts_path(@post.id), class: "btn" %>
+
+

@@ -1,0 +1,25 @@
+
+<h1>出品した商品一覧</h1>
+<% @user.posts.each do |f| %>
+<br>
+<div class="box25">
+<span>商品名：<%= f.title %> </span>
+<br>
+<span>商品説明：<%= f.body %> </span>
+<br>
+<span>商品価格：<%= f.price %>円 </span>
+
+<% if f.picture? %>
+<h2>商品画像</h2>
+<p><%#= image_tag f.picture.url %></p>
+	<p><%= image_tag f.picture %></p>
+<% else %>
+	<br>
+	<br>
+ 		<td>画像がありません</td>
+	<% end %>
+	</div>
+<br>
+<% end %>
+	<br>
+<%= link_to "一覧へ戻る", posts_path, class: "btn" %>
