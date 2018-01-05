@@ -1,41 +1,30 @@
-<%= form_for (@post) do |f| %>
-
-<h1>新規投稿</h1>
-
-<p>商品名：<%= f.text_field :title, placeholder: '商品名' %>
-<% if @post.errors.messages[:title].any? %>
-<span class="error"><%= @post.errors.messages[:title][0] %>></span>
-<% end %>
-</p>
-
-<p>詳細説明：<%= f.text_area :body %>
-<% if @post.errors.messages[:body].any? %>
-<span class="error"><%= @post.errors.messages[:body][0] %>></span>
-<% end %>
-</p>
-
-<p>価格：<%= f.text_field :price, placeholder: '数字半角入力' %>円
-<% if @post.errors.messages[:price].any? %>
-<span class="error"><%= @post.errors.messages[:price][0] %>></span>
-<% end %>
-</p> 
-
-
-<%#= form_for(@post) do |f| %>
-<!-- 
-<h3>サムネイル画像</h3> -->
-  <h3>商品画像</h3>
-  <%= f.file_field :picture %>
-  <%#= fields_for :product_images, @post.product_images do |image| %>
-  <%= fields_for(@post.product_images) do |image| %>
-  <!-- <h3>商品画像</h3> -->
-    <%#= image.file_field :image_id %>
-  <% end %>
-
-<p> <%= f.submit '保存' %> </p>
-
+<%= form_for(@post) do |f| %>
+	<h1>新規投稿</h1>
+	<p>
+		商品名：<%= f.text_field :title, placeholder: '商品名' %>
+		<% if @post.errors.messages[:title].any? %>
+			<span class="error"><%= @post.errors.messages[:title][0] %>></span>
+		<% end %>
+	</p>
+	<p>
+		詳細説明：<%= f.text_area :body %>
+		<% if @post.errors.messages[:body].any? %>
+			<span class="error"><%= @post.errors.messages[:body][0] %></span>
+		<% end %>
+	</p>
+	<p>
+		価格：<%= f.text_field :price, placeholder: '数字半角入力' %>円
+		<% if @post.errors.messages[:price].any? %>
+			<span class="error"><%= @post.errors.messages[:price][0] %></span>
+		<% end %>
+	</p> 
+	<h3>サムネイル画像</h3>
+  	<%= f.file_field :picture %>
+  	<%= f.fields_for(:product_images) do |image| %>
+    	<h3>商品画像</h3>
+    	<%= image.file_field :image_id %>
+  	<% end %>
+	<p> <%= f.submit '保存' %> </p>
 <% end %>
 <%= link_to "一覧へ戻る", posts_path(@post.id), class: "btn" %>
-
-<%# end %>	
 

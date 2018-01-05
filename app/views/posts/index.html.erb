@@ -1,7 +1,9 @@
-
+<br>
 <% if user_signed_in? %>
+
  <%= link_to "マイページ", user_path(current_user) %>
 
+ <%= link_to "カート", cart_path(current_user)  %>
 <% end %>
 
 <h1>商品一覧</h1>
@@ -14,14 +16,11 @@
 <p>
     <tr>
       <% if post.picture? %>
-    　<td><%=  image_tag post.picture.url%></td>
-    　<% else %>
-    　<td>画像がありません</td>
-    　
-    　<% end %>
-    
+	     <td><%=  image_tag post.picture.url%></td>
+    <% else %>
+    	 <td>画像がありません</td>
+    <% end %>    
     </tr>
-
 
 <span>商品名：<%=link_to post.title, post_path(post.id) %></span>
 

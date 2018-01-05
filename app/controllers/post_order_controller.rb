@@ -1,0 +1,3 @@
+class PostOrderController < ApplicationController
+
+end

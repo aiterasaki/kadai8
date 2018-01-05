@@ -1,6 +1,7 @@
 
 <% if user_signed_in? %>
- <%= link_to "マイページ", user_path(current_user) %>
+<%= link_to "マイページ", user_path(current_user) %>
+ <%= link_to "カート", cart_path(current_user)  %>
 <% end %>
 <br>
 <br>
@@ -8,28 +9,25 @@
 <br>
 <br>
 <div class="box25">
-<h3>商品名：<%= @post.title %></h3>
-<h3>商品説明：<%= @post.body %></h3>
-<h3>商品価格：<%= @post.price %>円</h3>
-<h3>商品画像</h3>
- <% if @post.picture? %>
-<p><%= image_tag @post.picture.url %></p>
- <% else %>
-    　<td>画像がありません</td>
- <% end %>
-
-
-<!-- <h2>商品画像</h2> -->
-<%#= image_tag @post.product_images.image_id.url %>
- <% @post.product_images.each do |pimage| %>
-  <% if @post.product_images? %>
- 	<%= image_tag pimage.image_id.url %>
- 	<br>
- 	<% else %>
-    　<td>画像がありません</td>
- <% end %>
-<% end %>
-<% if user_signed_in? %>
+	<h3>商品名：<%= @post.title %></h3>
+	<h3>商品説明：<%= @post.body %></h3>
+	<h3>商品価格：<%= @post.price %>円</h3>
+	<h3>サムネイル</h3>
+	<% if @post.picture? %>
+	<p><%= image_tag @post.picture.url %></p>
+	<% else %>
+	<p>画像がありません</p>
+	<% end %>
+	<h2>商品画像</h2>
+	<% @post.product_images.each do |product_image| %>
+	<% if product_image.image_id? %>
+	<%= image_tag product_image.image_id.url %>
+	<br>
+	<% else %>
+	<td>画像がありません</td>
+	<% end %>
+	<% end %>
+	<% if user_signed_in? %>
 	<% if current_user.id == @post.user.id %>
 
 	<%= link_to "編集", edit_post_path(@post.id), class: "btn edit-btn" %>
@@ -41,6 +39,19 @@
 <br>
 <% end %>
 
+<% if user_signed_in? %>
+
+	<%= form_for(@post_cart, url: {controller: :carts,action: :add_item}) do |f| %>
+	<%= f.number_field :quantity,value: @post_cart.quantity.to_i %>
+	<%= f.hidden_field :post_id, value: @post.id %>
+	<%= f.submit "カートに入れる" %>
+<% end %>
+
+<% else %>
+<%= link_to "カートに入れる　＊会員登録が必要です", new_user_registration_path, class: "btn" %>
+<% end %>
+<br>
+<br>
 <%= link_to "一覧へ戻る", posts_path(@post.id), class: "btn" %>
 
 

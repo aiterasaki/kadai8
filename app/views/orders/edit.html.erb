@@ -1,0 +1,37 @@
+<h1>注文内容を変更する</h1>
+
+<h1>お届け先住所</h1>
+<%= form_for current_user, multipart: true do |f| %>
+<span>名前：<%= f.text_field :name %></span>
+<br>
+<span>名前：<%= current_user.name %>
+<br>
+<span>email：<%= current_user.email %></span>
+<br>
+<span>郵便番号：<%=f.text_field :postal_code %></span>
+<br>
+<span>住所：<%=f.text_field :street_address %></span>
+<br>
+<span>電話番号：<%=f.text_field :telephone %></span>
+
+<% end %>
+
+<br>
+<br>
+<span>名前：<%= current_user.name %></span>
+<br>
+<span>email：<%= current_user.email %></span>
+<br>
+<span>郵便番号：<%= current_user.postal_code %></span>
+<br>
+<span>住所：<%= current_user.street_address %></span>
+<br>
+<span>電話番号：<%= current_user.telephone %></span>
+<br>
+<br>
+
+
+
+
+<%= link_to "保存して注文内容に戻る" , orders_path %>
+

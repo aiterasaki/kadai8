@@ -1,7 +1,15 @@
 class UsersController < ApplicationController
+  
+
+   def new
+    @cart = Cart.new
+    @cart.user_id = current_user.id
+    @cart.save
+    redirect_to posts_path 
+  end
+
   def index
   	#@user = User.all
-
   end
 
   def show

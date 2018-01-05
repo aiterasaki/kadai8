@@ -1,0 +1,39 @@
+<br>
+<br>
+<%= link_to "レジに進む", orders_path %>
+<%#= link_to "レジに進む", [:show, @order] %>
+<%#= link_to "レジに進む", post_orders_path(@post_order) %>
+
+<h2>ショッピングカート</h2>
+
+<h2>商品内容</h2>
+
+<% @post_carts.each do |post_cart|  %>
+
+<h3>商品名：<%= post_cart.post.title %></h3>
+
+<h3>商品説明：<%= post_cart.post.body %></h3>
+<h3>商品価格：<%= post_cart.post.price %>円</h3>
+
+<h3>サムネイル</h3>
+ <% if post_cart.post.picture? %>
+	<p><%= image_tag post_cart.post.picture.url %></p>
+ <% else %>
+    <p>画像がありません</p>
+ <% end %>
+
+<h2>商品画像</h2>
+
+<% post_cart.post.product_images.each do |product_image| %>
+
+  	<% if product_image.image_id? %>
+ 		<%= image_tag product_image.image_id.url %>
+ 		<br>
+ 	<% else %>
+    	<td>画像がありません</td>
+ 	<% end %>
+ <% end %>
+
+<% end %>
+
+<%= link_to "一覧へ戻る", posts_path, class: "btn" %>

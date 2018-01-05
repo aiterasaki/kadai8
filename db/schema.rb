@@ -10,7 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171115094336) do
+ActiveRecord::Schema.define(version: 20171202053449) do
+
+  create_table "carts", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "post_carts", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "cart_id"
+    t.integer "quantity", default: 0
+    t.integer "total_fee", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "post_orders", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "posts", force: :cascade do |t|
     t.string "title"
@@ -43,6 +71,10 @@ ActiveRecord::Schema.define(version: 20171115094336) do
     t.string "avatar"
     t.string "user"
     t.boolean "admin_flg"
+    t.string "name"
+    t.integer "postal_code"
+    t.text "street_address"
+    t.integer "telephone"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

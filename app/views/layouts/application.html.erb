@@ -10,7 +10,10 @@
 
   <body>
   	<% if user_signed_in? %>
-  	<%= current_user.email %>さんとして ログイン しています。
+    ようこそ<%= current_user.name  %>さん
+    <br>
+  	email：<%= current_user.email %>でログインしています。
+    <br>
     <br>
     異なる場合は
   	<%= link_to "ログアウト", destroy_user_session_path, method: :delete %>願います。
@@ -20,6 +23,7 @@
 
 
   	<%= link_to "ログイン", new_user_session_path %>
+    <%= link_to "管理者用ページ", rails_admin_path %>
 <% end %>
 
     <%= yield %>

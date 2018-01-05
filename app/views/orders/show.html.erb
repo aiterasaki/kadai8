@@ -1,0 +1,54 @@
+<h1>注文内容を確認・変更する</h1>
+
+<h1>お届け先住所</h1>
+
+<span>名前：<%= current_user.name %></span>
+<br>
+<span>email：<%= current_user.email %></span>
+<br>
+<span>郵便番号：<%= current_user.postal_code %></span>
+<br>
+<span>住所：<%= current_user.street_address %></span>
+<br>
+<span>電話番号：<%= current_user.telephone %></span>
+<br>
+<br>
+<%#= link_to "お届け先住所を変更する" , edit_orders_path %>
+<%= link_to "お届け先住所を変更する" , edit_user_registration_path %>
+
+
+<h2>商品内容</h2>
+
+<% @post_carts.each do |post_cart|  %>
+
+<h3>商品名：<%= post_cart.post.title %></h3>
+
+<h3>商品説明：<%= post_cart.post.body %></h3>
+<h3>商品価格：<%= post_cart.post.price %>円</h3>
+
+<h3>サムネイル</h3>
+ <% if post_cart.post.picture? %>
+	<p><%= image_tag post_cart.post.picture.url %></p>
+ <% else %>
+    <p>画像がありません</p>
+ <% end %>
+
+<h2>商品画像</h2>
+
+<% post_cart.post.product_images.each do |product_image| %>
+
+  	<% if product_image.image_id? %>
+ 		<%= image_tag product_image.image_id.url %>
+ 		<br>
+ 	<% else %>
+    	<td>画像がありません</td>
+ 	<% end %>
+ <% end %>
+
+<% end %>
+
+
+	<%= link_to "注文を確定する" , orders_path, method: :post%>
+
+
+<br>

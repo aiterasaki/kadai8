@@ -1,21 +1,17 @@
-<%= form_for @post do |f| %>
+<%= form_for @post, multipart: true do |f| %>
 
 <h1>投稿を編集する</h1>
 
 <h2>商品名</h2>
-<%#= binding.pry %>
+
 <%= f.text_field :title %>
 <h2>商品説明</h2>
 <%= f.text_area :body %>
 <h2>商品価格</h2>
 <%= f.text_field :price %>
-<h1>商品画像</h1>
-<!-- <h2>サムネイル画像</h2> -->
-<%= f.file_field :picture %> 
 
-<!-- <h1>商品画像</h1> -->
-<%#= f.file_field :image_id %> 
-<br>
+<h2>サムネイル画像</h2>
+<%= f.file_field :picture %> 
 <br>
 <%= f.submit '保存' %>
 
